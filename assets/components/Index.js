@@ -4,6 +4,8 @@ import { Button, Rating, Spinner } from 'flowbite-react';
 const Index = props => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [latestYear, setLatestYear] = useState(true);
+    const [rating, setRating] = useState(true);
 
     const fetchMovies = () => {
         setLoading(true);
@@ -14,6 +16,16 @@ const Index = props => {
                 setMovies(data.movies);
                 setLoading(false);
             });
+    }
+
+    const orderByLatestYear = () => {
+      const sortedMovies = [...movies].sort((a, b) => b.year - a.year);
+      setMovies(sortedMovies);
+    }
+
+    const orderByRating = () => {
+      const sortedMovies = [...movies].sort((a, b) => b.rating - a.rating);
+      setMovies(sortedMovies);
     }
 
     useEffect(() => {
